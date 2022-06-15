@@ -1,0 +1,35 @@
+version: "2.7"
+
+services:
+  web:
+    image: nginx:stable
+    volumes:
+      - ./server/nginx/templates:/etc/nginx/templates
+      - ./server/nginx/cert:/etc/nginx/cert
+    ports:
+      - "443:443"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=443
+      - SSL_CERT=./cert/server.crt
+      - SSL_KEY=./cert/server.key
+
+  client-ssl-failed:
+    image: curlimages/curl:7.83.0
+    command: -v https://web
+    depends_on:
+      - web
+
+  client-ssl-allow:
+    image: curlimages/curl:7.83.0
+    command: -v --insecure https://web
+    depends_on:
+      - web
+
+  client-ssl-ok:
+    build: client
+    environment:
+      - OPTION=-v
+      - URL=https://web
+    depends_on:
+      - web

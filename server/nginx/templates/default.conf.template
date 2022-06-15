@@ -1,0 +1,27 @@
+server {
+    listen ${NGINX_PORT} ssl http2;
+    listen [::]:${NGINX_PORT} ssl http2;
+    #listen ${NGINX_PORT};
+    #listen [::]:${NGINX_PORT};
+    server_name  ${NGINX_HOST};
+
+    ssl_certificate     ${SSL_CERT};
+    ssl_certificate_key ${SSL_KEY};   
+
+    root   /usr/share/nginx/html;
+
+    location / {
+        index  index.html index.htm;
+        expires -1;
+        try_files $uri $uri/ /index.html;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
