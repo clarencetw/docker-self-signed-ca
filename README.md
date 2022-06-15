@@ -15,8 +15,10 @@ openssl x509 -req -in server/nginx/cert/server.csr -CA server/nginx/cert/rootCA.
 ```
 
 ### 複製 CA 與 Server certificate 給系統使用
+```
 cp server/nginx/cert/rootCA.crt client/rootCA.crt
 cp server/nginx/cert/server.crt client/server.crt
+```
 
 ## 執行 docker-compose 測試
 
