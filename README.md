@@ -26,13 +26,13 @@ cp server/nginx/cert/server.crt client/server.crt
 - `docker-compose up`
 
 ### Web Server正常開啟
-[](./images/ca-web.png)
+![](./images/ca-web.png)
 
 ### Client SSL failed
-[](./images/ssl-failed.png)
+![](./images/ssl-failed.png)
 
 ### Client SSL allow
-[](./images/ssl-allow.png)
+![](./images/ssl-allow.png)
 
 ### Client use self sign ok
-[](./images/ssl-ok.png)
+![](./images/ssl-ok.png)
