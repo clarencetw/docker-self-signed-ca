@@ -28,6 +28,10 @@ services:
 
   client-ssl-ok:
     build: client
+    command: docker-entrypoint.sh
+    volumes:
+      - ./server/nginx/cert/server.crt:/usr/local/share/ca-certificates/server.crt
+      - ./server/nginx/cert/rootCA.crt:/usr/local/share/ca-certificates/rootCA.crt
     environment:
       - OPTION=-v
       - URL=https://web

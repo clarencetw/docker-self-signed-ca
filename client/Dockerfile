@@ -1,9 +1,11 @@
-FROM alpine:latest
-RUN apk add --update curl && rm -rf /var/cache/apk/*
+FROM ubuntu:20.04
 
-COPY rootCA.crt /usr/local/share/ca-certificates/rootCA.crt
-COPY server.crt /usr/local/share/ca-certificates/server.crt
-RUN update-ca-certificates
+RUN apt-get update \
+ && apt-get upgrade -y \
+ && apt-get install -y --no-install-recommends \
+            wget curl ca-certificates \
+ && apt-get autoremove -y \
+ && rm -rf /root/.cache
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh 
